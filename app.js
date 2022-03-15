@@ -141,4 +141,27 @@ app.put("/change-password", authenticateToken, async (req, res) => {
 	}
 });
 
+app.post("/user-table/:username/", async (req, res) => {
+	const { username } = req.params;
+	const { inputData } = req.body;
+	const selectUserQuery = `PRAGMA TABLE_INFO(${username});`;
+	const dataBaseUserTable = await dataBase.get(selectUserQuery);
+	if (dataBaseUserTable === undefined) {
+		const createUserInputTableQuery = `
+	    CREATE TABLE ${username} (id INT, user_id INT, body VARCHAR(255), title VARCHAR(255));`;
+		const createUserTableDb = await dataBase.get(createUserInputTableQuery);
+	} else {
+		const values = inputData.map(
+			(eachBook) =>
+				`(${eachBook.userId},${parseInt(eachBook.id)},${eachBook.title}, ${
+					eachBook.body
+				})`
+		);
+		const valuesString = values.join(",");
+		const addDataQuery = `INSERT INTO ${username} (id,user_id,body,title) VALUES ${valuesString};`;
+		const dbResponse = await dataBase.run(addDataQuery);
+		res.send(dbResponse);
+	}
+});
+
 module.exports = app;
