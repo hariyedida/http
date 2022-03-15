@@ -153,12 +153,10 @@ app.post("/user-table/:username/", async (req, res) => {
 	} else {
 		const values = inputData.map(
 			(eachBook) =>
-				`(${eachBook.userId},${parseInt(eachBook.id)},${eachBook.title}, ${
-					eachBook.body
-				})`
+				`(${eachBook.userId},${eachBook.id},${eachBook.title}, ${eachBook.body})`
 		);
 		const valuesString = values.join(",");
-		const addDataQuery = `INSERT INTO ${username} (id,user_id,body,title) VALUES ${valuesString};`;
+		const addDataQuery = `INSERT INTO ${username} (user_id,id,title,body) VALUES ${valuesString};`;
 		const dbResponse = await dataBase.run(addDataQuery);
 		res.send(dbResponse);
 	}
