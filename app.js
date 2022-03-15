@@ -60,6 +60,11 @@ const validatePassword = (password) => {
 	return password.length > 8;
 };
 
+app.get("/", (req, res) => {
+	res.status(200);
+	res.send("Running");
+});
+
 app.post("/register", async (request, response) => {
 	const { username, name, password, gender, location } = request.body;
 	const hashedPassword = await bcrypt.hash(password, 10);
