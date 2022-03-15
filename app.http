@@ -1,0 +1,30 @@
+POST http://localhost:9000/login/
+Content-Type: application/json
+
+{
+    "username":"asdf",
+    "password":"qwerty1234"
+}
+
+###
+POST http://localhost:9000/register/
+Content-Type: application/json
+
+{
+    "username":"asdf",
+    "name":"hari",
+    "password":"123456789",
+    "gender":"male",
+    "location":"vizag"
+}
+
+###
+PUT http://localhost:9000/change-password/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZGYiLCJpYXQiOjE2NDczMjQ1NjB9.5mSI1JEgc3bJllh1z-4BCCu5YJoJzN2c6Mle02eVNeI
+Content-Type: application/json
+
+{
+    "username":"asdf",
+    "oldPassword":"123456789",
+    "newPassword":"qwerty1234"
+}
