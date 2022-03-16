@@ -94,7 +94,7 @@ app.post("/login", async (req, res) => {
 
 	if (dataBaseUser === undefined) {
 		res.status(400);
-		res.send({ status_code: 400, error_msg: "Invalid user" });
+		res.send({ status_code: 400, error_msg: "Invalid username" });
 	} else {
 		const isPasswordMatched = await bcrypt.compare(
 			password,
@@ -106,7 +106,10 @@ app.post("/login", async (req, res) => {
 			res.send({ jwtToken });
 		} else {
 			res.status(400);
-			res.send({ status_code: 400, error_msg: "Invalid password" });
+			res.send({
+				status_code: 400,
+				error_msg: "username and password didn't match",
+			});
 		}
 	}
 });
