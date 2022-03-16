@@ -14,7 +14,7 @@ POST http://localhost:9000/register/
 Content-Type: application/json
 
 {
-    "username":"yedida",
+    "username":"ramasd",
     "name":"hari",
     "password":"123456789",
     "gender":"male",

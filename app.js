@@ -77,7 +77,7 @@ app.post("/register", async (request, response) => {
 		if (validatePassword(password)) {
 			await dataBase.run(createUserQuery);
 			response.status(200);
-			response.send("User created successfully");
+			response.send({ user_created: "User created successfully" });
 		} else {
 			response.status(400);
 			response.send({ error_msg: "Password is too short" });
