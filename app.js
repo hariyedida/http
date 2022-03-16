@@ -76,14 +76,15 @@ app.post("/register", async (request, response) => {
         INSERT INTO user (username, name, password, gender,location) VALUES ( '${username}','${name}','${hashedPassword}','${gender}','${location}');`;
 		if (validatePassword(password)) {
 			await dataBase.run(createUserQuery);
+			response.status(200);
 			response.send("User created successfully");
 		} else {
 			response.status(400);
-			response.send("Password is too short");
+			response.send({ error_msg: "Password is too short" });
 		}
 	} else {
 		response.status(400);
-		response.send("User already exists");
+		response.send({ error_msg: "User already exists" });
 	}
 });
 
