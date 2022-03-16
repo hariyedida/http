@@ -94,7 +94,7 @@ app.post("/login", async (req, res) => {
 
 	if (dataBaseUser === undefined) {
 		res.status(400);
-		res.send("Invalid User");
+		res.send({ status_code: 400, error_msg: "Invalid user" });
 	} else {
 		const isPasswordMatched = await bcrypt.compare(
 			password,
@@ -106,7 +106,7 @@ app.post("/login", async (req, res) => {
 			res.send({ jwtToken });
 		} else {
 			res.status(400);
-			res.send("Invalid password");
+			res.send({ status_code: 400, error_msg: "Invalid password" });
 		}
 	}
 });
@@ -177,9 +177,7 @@ app.post("/user-table/", authenticateToken, async (req, res) => {
 app.get("/user-data", authenticateToken, async (req, res) => {
 	const { username } = req;
 	const dataQuery = `SELECT * FROM ${username}`;
-	console.log(dataQuery);
 	const data = await dataBase.all(dataQuery);
-
 	res.send({ userData: data });
 });
 
