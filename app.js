@@ -179,8 +179,8 @@ app.get("/user-data", authenticateToken, async (req, res) => {
 	const dataQuery = `SELECT * FROM ${username}`;
 	console.log(dataQuery);
 	const data = await dataBase.all(dataQuery);
-	console.log(data);
-	res.send(data);
+
+	res.send({ userData: data });
 });
 
 module.exports = app;
