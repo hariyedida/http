@@ -174,4 +174,13 @@ app.post("/user-table/", authenticateToken, async (req, res) => {
 	}
 });
 
+app.get("/user-data", authenticateToken, async (req, res) => {
+	const { username } = req;
+	const dataQuery = `SELECT * FROM ${username}`;
+	console.log(dataQuery);
+	const data = await dataBase.all(dataQuery);
+	console.log(data);
+	res.send(data);
+});
+
 module.exports = app;

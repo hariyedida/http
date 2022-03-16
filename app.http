@@ -21,6 +21,8 @@ Content-Type: application/json
     "location":"vizag"
 }
 
+
+
 ###
 PUT http://localhost:9000/change-password/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZGYiLCJpYXQiOjE2NDczMjQ1NjB9.5mSI1JEgc3bJllh1z-4BCCu5YJoJzN2c6Mle02eVNeI
@@ -644,3 +646,9 @@ Content-Type: application/json
   }
 ]
 }
+
+
+###
+
+get http://localhost:9000/user-data/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InllZGlkYSIsImlhdCI6MTY0NzQxMDc3M30.fvUENJXTRvvlC8p8q_cEaX7MS4OtH-WSM2NkzVb7Kcc
