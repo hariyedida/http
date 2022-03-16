@@ -5,8 +5,8 @@ POST http://localhost:9000/login/
 Content-Type: application/json
 
 {
-    "username":"asdf",
-    "password":"qwerty1234"
+    "username":"yedida",
+    "password":"123456789"
 }
 
 ###
@@ -14,7 +14,7 @@ POST http://localhost:9000/register/
 Content-Type: application/json
 
 {
-    "username":"asdf",
+    "username":"yedida",
     "name":"hari",
     "password":"123456789",
     "gender":"male",
@@ -36,7 +36,8 @@ Content-Type: application/json
 ###
 
 
-post http://localhost:9000/user-table/hari/
+post http://localhost:9000/user-table/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InllZGlkYSIsImlhdCI6MTY0NzQxMDc3M30.fvUENJXTRvvlC8p8q_cEaX7MS4OtH-WSM2NkzVb7Kcc
 Content-Type: application/json
 
 {

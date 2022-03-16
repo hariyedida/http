@@ -141,24 +141,36 @@ app.put("/change-password", authenticateToken, async (req, res) => {
 	}
 });
 
-app.post("/user-table/:username/", async (req, res) => {
-	const { username } = req.params;
+app.post("/user-table/", authenticateToken, async (req, res) => {
 	const { inputData } = req.body;
+	const { username } = req;
 	const selectUserQuery = `PRAGMA TABLE_INFO(${username});`;
 	const dataBaseUserTable = await dataBase.get(selectUserQuery);
-	if (dataBaseUserTable === undefined) {
-		const createUserInputTableQuery = `
-	    CREATE TABLE ${username} (id INT, user_id INT, body VARCHAR(255), title VARCHAR(255));`;
-		const createUserTableDb = await dataBase.get(createUserInputTableQuery);
-	} else {
+
+	const addDatatoDb = async () => {
+		console.log("add to DB");
 		const values = inputData.map(
 			(eachBook) =>
-				`(${eachBook.userId},${eachBook.id},${eachBook.title}, ${eachBook.body})`
+				`(${eachBook.userId},${eachBook.id},"${eachBook.title}", "${eachBook.body}")`
 		);
 		const valuesString = values.join(",");
 		const addDataQuery = `INSERT INTO ${username} (user_id,id,title,body) VALUES ${valuesString};`;
 		const dbResponse = await dataBase.run(addDataQuery);
 		res.send(dbResponse);
+	};
+
+	if (dataBaseUserTable === undefined) {
+		const createUserInputTableQuery = `
+	    CREATE TABLE ${username} (id INT, user_id INT, body VARCHAR(255), title VARCHAR(255));`;
+		const createUserTableDb = await dataBase.run(createUserInputTableQuery);
+		// console.log("table", createUserTableDb);
+		const isTableCreated = await dataBase.get(selectUserQuery);
+		addDatatoDb();
+	} else {
+		const deletePrevDataQuery = `DELETE FROM ${username}`;
+		const deleteData = await dataBase.run(deletePrevDataQuery);
+		console.log("delete", deleteData);
+		addDatatoDb();
 	}
 });
 

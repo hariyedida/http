@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "nodemon app.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -14,14 +14,12 @@
 		"cors": "^2.8.5",
 		"express": "^4.17.3",
 		"jsonwebtoken": "^8.5.1",
+		"loader": "^2.1.1",
 		"nodemon": "^2.0.15",
 		"sqlite": "4.0.19",
 		"sqlite3": "5.0.2"
 	},
 	"engines": {
 		"node": "14.18.0"
-	},
-	"scripts": {
-		"start": "nodemon app.js"
 	}
 }
