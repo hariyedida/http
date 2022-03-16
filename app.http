@@ -652,3 +652,7 @@ Content-Type: application/json
 
 get http://localhost:9000/user-data/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InllZGlkYSIsImlhdCI6MTY0NzQxMDc3M30.fvUENJXTRvvlC8p8q_cEaX7MS4OtH-WSM2NkzVb7Kcc
+
+###
+delete http://localhost:9000/delete-data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcmkiLCJpYXQiOjE2NDc0MzA1MDd9.Vch1jWILt6-cLbo6m6W8jvfFk5zYS6PGsYvH0MIjigQ

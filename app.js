@@ -146,21 +146,22 @@ app.put("/change-password", authenticateToken, async (req, res) => {
 });
 
 app.post("/user-table/", authenticateToken, async (req, res) => {
-	const { inputData } = req.body;
+	const { userData } = req.body;
 	const { username } = req;
 	const selectUserQuery = `PRAGMA TABLE_INFO(${username});`;
 	const dataBaseUserTable = await dataBase.get(selectUserQuery);
+	// console.log(username);
 
 	const addDatatoDb = async () => {
-		console.log("add to DB");
-		const values = inputData.map(
+		const values = userData.map(
 			(eachBook) =>
 				`(${eachBook.userId},${eachBook.id},"${eachBook.title}", "${eachBook.body}")`
 		);
 		const valuesString = values.join(",");
 		const addDataQuery = `INSERT INTO ${username} (user_id,id,title,body) VALUES ${valuesString};`;
 		const dbResponse = await dataBase.run(addDataQuery);
-		res.send(dbResponse);
+		res.status(200);
+		res.send({ message: "Data added to DB" });
 	};
 
 	if (dataBaseUserTable === undefined) {
@@ -173,7 +174,6 @@ app.post("/user-table/", authenticateToken, async (req, res) => {
 	} else {
 		const deletePrevDataQuery = `DELETE FROM ${username}`;
 		const deleteData = await dataBase.run(deletePrevDataQuery);
-		console.log("delete", deleteData);
 		addDatatoDb();
 	}
 });
@@ -183,6 +183,14 @@ app.get("/user-data", authenticateToken, async (req, res) => {
 	const dataQuery = `SELECT * FROM ${username}`;
 	const data = await dataBase.all(dataQuery);
 	res.send({ userData: data });
+});
+
+app.delete("/delete-data", authenticateToken, async (req, res) => {
+	const { username } = req;
+	const deleteDataQuery = `DELETE FROM ${username}`;
+	const data = await dataBase.run(deleteDataQuery);
+	res.status(200);
+	res.send({ data_deleted: "data deleted from table" });
 });
 
 module.exports = app;
