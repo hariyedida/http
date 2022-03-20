@@ -84,7 +84,7 @@ app.post("/register", async (request, response) => {
 		}
 	} else {
 		response.status(400);
-		response.send({ error_msg: "User already exists" });
+		response.send({ error_msg: "That username is taken. Try another" });
 	}
 });
 
